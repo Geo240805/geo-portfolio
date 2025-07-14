@@ -152,7 +152,7 @@ export function AboutSection() {
               {/* Stats */}
               <div className="grid grid-cols-3 gap-6 pt-6 border-t border-slate-200 dark:border-slate-700">
                 <div className="text-center">
-                  <div className="text-2xl font-bold gradient-text">3</div>
+                  <div className="text-2xl font-bold gradient-text">2</div>
                   <div className="text-sm text-slate-600 dark:text-slate-400">
                     Proyectos
                   </div>
