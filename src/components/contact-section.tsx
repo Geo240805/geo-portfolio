@@ -1,23 +1,11 @@
 "use client";
 
-import type React from "react";
-
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Github, Mail, MapPin, Phone, Send } from "lucide-react";
+import { Github, Mail, MapPin, Phone } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 export function ContactSection() {
   const [isVisible, setIsVisible] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -36,36 +24,6 @@ export function ContactSection() {
 
     return () => observer.disconnect();
   }, []);
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    });
-    setIsSubmitting(false);
-
-    // Show success message (you can implement a toast notification here)
-    alert("¡Mensaje enviado correctamente! Te responderé pronto.");
-  };
 
   const contactInfo = [
     {
@@ -130,7 +88,7 @@ export function ContactSection() {
             <div className="w-24 h-1 mx-auto mt-6 rounded-full bg-gradient-to-r from-teal-600 to-emerald-600"></div>
           </div>
 
-          <div className="grid items-start gap-12 lg:grid-cols-2">
+          <div className="flex items-center justify-center gap-12 ">
             {/* Contact Info */}
             <div className="space-y-8">
               <div>
@@ -215,126 +173,6 @@ export function ContactSection() {
                 <p className="text-slate-600 dark:text-slate-400">
                   Actualmente acepto nuevos proyectos. Tiempo de respuesta
                   promedio: 24 horas.
-                </p>
-              </div>
-            </div>
-
-            {/* Contact Form */}
-            <div
-              className={`bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg border border-slate-200/50 dark:border-slate-700/50 ${
-                isVisible ? "animate-slide-in-right" : ""
-              }`}
-            >
-              <h3 className="mb-6 text-2xl font-bold text-slate-900 dark:text-white">
-                Envíame un Mensaje
-              </h3>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label
-                      htmlFor="name"
-                      className="text-slate-700 dark:text-slate-300"
-                    >
-                      Nombre *
-                    </Label>
-                    <Input
-                      id="name"
-                      name="name"
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className="border-slate-300 dark:border-slate-600 focus:border-teal-500 focus:ring-teal-500"
-                      placeholder="Tu nombre completo"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label
-                      htmlFor="email"
-                      className="text-slate-700 dark:text-slate-300"
-                    >
-                      Email *
-                    </Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="border-slate-300 dark:border-slate-600 focus:border-teal-500 focus:ring-teal-500"
-                      placeholder="tu@email.com"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label
-                    htmlFor="subject"
-                    className="text-slate-700 dark:text-slate-300"
-                  >
-                    Asunto *
-                  </Label>
-                  <Input
-                    id="subject"
-                    name="subject"
-                    type="text"
-                    required
-                    value={formData.subject}
-                    onChange={handleInputChange}
-                    className="border-slate-300 dark:border-slate-600 focus:border-teal-500 focus:ring-teal-500"
-                    placeholder="¿En qué puedo ayudarte?"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label
-                    htmlFor="message"
-                    className="text-slate-700 dark:text-slate-300"
-                  >
-                    Mensaje *
-                  </Label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={5}
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    className="resize-none border-slate-300 dark:border-slate-600 focus:border-teal-500 focus:ring-teal-500"
-                    placeholder="Cuéntame sobre tu proyecto, ideas o cualquier pregunta que tengas..."
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-3 font-medium text-white transition-all duration-300 transform rounded-lg bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-                >
-                  {isSubmitting ? (
-                    <div className="flex items-center justify-center space-x-2">
-                      <div className="w-4 h-4 border-2 border-white rounded-full border-t-transparent animate-spin"></div>
-                      <span>Enviando...</span>
-                    </div>
-                  ) : (
-                    <div className="flex items-center justify-center space-x-2">
-                      <Send className="w-4 h-4" />
-                      <span>Enviar Mensaje</span>
-                    </div>
-                  )}
-                </Button>
-              </form>
-
-              <div className="pt-6 mt-6 border-t border-slate-200 dark:border-slate-700">
-                <p className="text-sm text-center text-slate-500 dark:text-slate-400">
-                  También puedes escribirme directamente a{" "}
-                  <a
-                    href="mailto:alex@alexrivera.dev"
-                    className="font-medium text-teal-600 dark:text-teal-400 hover:underline"
-                  >
-                    geovannyed.pe.va@gmail.com
-                  </a>
                 </p>
               </div>
             </div>

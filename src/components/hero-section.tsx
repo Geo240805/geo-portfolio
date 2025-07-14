@@ -101,6 +101,9 @@ export function HeroSection() {
                 Ver Proyectos
               </Button>
               <Button
+                onClick={() => {
+                  window.open("/cv.pdf", "_blank");
+                }}
                 variant="outline"
                 size="lg"
                 className="px-8 py-3 text-teal-600 transition-all duration-300 transform bg-transparent border-2 border-teal-600 rounded-full hover:bg-teal-600 hover:text-white hover:scale-105"
