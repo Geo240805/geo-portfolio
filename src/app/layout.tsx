@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es_ES",
-    url: "https://geovanyedgardo.dev",
+    url: "https://geo-portfolio-sage.vercel.app/",
     title: "Geovanny  Edgardo - Desarrollador Web",
     description:
       "Portafolio profesional de Geovanny  Edgardo, desarrollador Web especializado en Vue y tecnologías modernas.",
